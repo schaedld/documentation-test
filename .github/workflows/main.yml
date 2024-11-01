@@ -1,0 +1,33 @@
+name: Convert and Deploy Reveal.js Presentation
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Ruby
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 2.7
+
+      - name: Install dependencies
+        run: |
+          sudo gem install bundler
+          sudo bundle install
+
+      - name: Convert ASCIIDOC to Reveal.js
+        run: asciidoctor -r asciidoctor-revealjs -b revealjs -o output/slides.html slides/slides.adoc
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./output
