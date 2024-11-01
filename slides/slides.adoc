@@ -1,0 +1,13 @@
+= Main Slide
+:source-highlighter: highlight.js
+:revealjs_theme: black
+:revealjs_transition: slide
+:icons: font
+:revealjs_slide_classes: stretch
+
+== Willkommen
+[%step]
+* Guguseli
+* Ja
+* Du
+* Du
